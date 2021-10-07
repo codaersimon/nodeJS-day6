@@ -15,7 +15,7 @@ app.listen(port,() =>{
     console.log(`listening at https://localhost:${port}`)
 })
 
-// https://newsapi.org/v2/everything?q=tesla&from=2021-09-07&sortBy=publishedAt&apiKey=e7ab6be519eb456cb3145732c1493ac7
+// https://api.themoviedb.org/3/movie/550?api_key=dc8d718477779fa1c33a7a948657d07c
 
 app.get('/',(req,res) =>{
     res.render('index.ejs',
@@ -35,7 +35,7 @@ app.get('/contact',(req,res) =>{
 })
 
 app.get('/news',(req,res) =>{
-    axios.get(`https://newsapi.org/v2/everything?q=tesla&from=2021-09-07&sortBy=publishedAt&apiKey=${process.env.API_KEY}`)
+    axios.get(`https://api.themoviedb.org/3/movie/550?api_key==${process.env.API_KEY}`)
     .then(function (response) {
     // handle success
     console.log(response.data.articles);
