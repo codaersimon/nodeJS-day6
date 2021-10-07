@@ -15,7 +15,14 @@ app.listen(port,() =>{
 })
 
 app.get('/',(req,res) =>{
-    res.render('index.ejs',{title: 'home', apiKey: process.env.API_KEY, username: process.env.USERNAME})
+    console.log(process.env.API_KEY)
+    console.log(process.env.USERNAME)
+    res.render('index.ejs',
+    {
+        title: 'home',
+        apiKey: process.env.API_KEY,
+        username: process.env.USERNAME,
+    })
 })
 
 app.get('/about',(req,res) =>{
