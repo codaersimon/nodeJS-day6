@@ -1,7 +1,8 @@
 const express = require('express');
 const app = express();
 require('dotenv').config()
-console.log(process.env)
+// console.log(process.env)
+const axios = require('axios');
 // 
 const port = process.env.PORT || 3000
 
@@ -14,9 +15,9 @@ app.listen(port,() =>{
     console.log(`listening at https://localhost:${port}`)
 })
 
+// https://newsapi.org/v2/everything?q=tesla&from=2021-09-07&sortBy=publishedAt&apiKey=e7ab6be519eb456cb3145732c1493ac7
+
 app.get('/',(req,res) =>{
-    console.log(process.env.API_KEY)
-    console.log(process.env.USERNAME)
     res.render('index.ejs',
     {
         title: 'home',
@@ -31,4 +32,17 @@ app.get('/about',(req,res) =>{
 
 app.get('/contact',(req,res) =>{
     res.render('contact.ejs')
+})
+
+app.get('/news',(req,res) =>{
+    axios.get(`https://newsapi.org/v2/everything?q=tesla&from=2021-09-07&sortBy=publishedAt&apiKey=${process.env.API_KEY}`)
+    .then(function (response) {
+    // handle success
+    console.log(response.data.articles);
+    res.render('news.ejs', {articles: response.data.articles})
+})
+    .catch(function (error) {
+    // handle error
+    console.log(error);
+    })
 })
